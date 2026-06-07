@@ -273,6 +273,26 @@ export type SERVICES_QUERY_RESULT = {
   }>;
 } | null;
 
+// Source: src/hooks/useSanityData.ts
+// Variable: ABOUT_US_QUERY
+// Query: *[_type == "aboutUs"][0]
+export type ABOUT_US_QUERY_RESULT = null;
+
+// Source: src/hooks/useSanityData.ts
+// Variable: CONTACT_US_QUERY
+// Query: *[_type == "contactUs"][0]
+export type CONTACT_US_QUERY_RESULT = null;
+
+// Source: src/hooks/useSanityData.ts
+// Variable: NAVIGATION_QUERY
+// Query: *[_type == "navigation"][0]
+export type NAVIGATION_QUERY_RESULT = null;
+
+// Source: src/hooks/useSanityData.ts
+// Variable: FOOTER_QUERY
+// Query: *[_type == "footer"][0]
+export type FOOTER_QUERY_RESULT = null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -280,5 +300,9 @@ declare module "@sanity/client" {
     '*[_type == "hero"][0]': HERO_QUERY_RESULT;
     '*[_type == "howWeWork"][0]': HOW_WE_WORK_QUERY_RESULT;
     '*[_type == "servicesSection"][0]': SERVICES_QUERY_RESULT;
+    '*[_type == "aboutUs"][0]': ABOUT_US_QUERY_RESULT;
+    '*[_type == "contactUs"][0]': CONTACT_US_QUERY_RESULT;
+    '*[_type == "navigation"][0]': NAVIGATION_QUERY_RESULT;
+    '*[_type == "footer"][0]': FOOTER_QUERY_RESULT;
   }
 }

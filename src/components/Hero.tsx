@@ -5,9 +5,8 @@ import { useHeroData } from "../hooks/useSanityData";
 export const Hero = () => {
   const { data: heroData } = useHeroData();
 
-
   const bgImage = heroData?.backgroundImage ? urlFor(heroData.backgroundImage).width(1920).height(1080).url() : heroBg;
-  const bgImageAlt = heroData?.backgroundImage?.altText || 'Hero Background Image';
+  const bgImageAlt = heroData?.backgroundImage?.Alt || 'Hero Background Image';
 
   return (
     <div

@@ -1,6 +1,7 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { schemaTypes } from './src/schemaTypes'
+import { structure } from './structure'
 
 // Using the project ID from the one I just created since you didn't provide yours.
 // If you want to use "mybld-sanity", replace `projectId` here!
@@ -10,7 +11,7 @@ export default defineConfig({
   projectId: 'ot86yj05',
   dataset: 'production',
   basePath: '/sanity',
-  plugins: [structureTool()],
+  plugins: [structureTool({ structure })],
   schema: {
     types: schemaTypes,
   },
