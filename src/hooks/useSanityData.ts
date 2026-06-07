@@ -87,3 +87,15 @@ export const useFooterData = () => {
     },
   });
 };
+
+const ANNOUNCEMENT_BANNER_QUERY = defineQuery(`*[_type == "announcementBanner"][0]`);
+
+export const useAnnouncementBannerData = () => {
+  return useQuery({
+    queryKey: ['sanity', 'announcementBanner'],
+    queryFn: async () => {
+      const data = await client.fetch(ANNOUNCEMENT_BANNER_QUERY);
+      return data;
+    },
+  });
+};

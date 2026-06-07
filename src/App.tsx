@@ -3,12 +3,15 @@ import { useEffect } from "react";
 import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Projects } from "./pages/Projects";
+import { AnnouncementBanner } from "./components/AnnouncementBanner";
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import SanityStudio from "./pages/SanityStudio";
+import { useAnnouncementBannerData } from './hooks/useSanityData';
 
 const Layout = () => {
   const location = useLocation();
+  const { data: announcementBannerData } = useAnnouncementBannerData();
 
   useEffect(() => {
     if (!location.hash) return;
@@ -22,6 +25,7 @@ const Layout = () => {
 
   return (
     <div className="relative">
+      {announcementBannerData?.enabled && <AnnouncementBanner />}
       <Navigation />
       <Outlet />
       <Footer />

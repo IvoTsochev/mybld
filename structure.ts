@@ -47,6 +47,14 @@ export const structure: StructureResolver = (S) =>
             .documentId('footer')
             .title('Footer'),
         ),
+      S.listItem()
+        .title('Announcement Banner')
+        .child(
+          S.document()
+            .schemaType('announcementBanner')
+            .documentId('announcementBanner')
+            .title('Announcement Banner'),
+        ),
       // When the project schema is added, uncomment:
       // S.documentTypeListItem('project').title('Projects'),
     ])

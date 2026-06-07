@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
-import { useNavigationData } from '../hooks/useSanityData';
+import { useAnnouncementBannerData, useNavigationData } from '../hooks/useSanityData';
 
 const toNavLink = (link: string) => (link.startsWith('#') ? `/${link}` : link);
 
 export const Navigation = () => {
   const { data: navigationData } = useNavigationData();
+  const { data: announcementBannerData } = useAnnouncementBannerData();
 
   return (
-    <nav className="absolute top-0 left-0 w-full z-50 flex flex-col md:flex-row justify-between items-center px-[5%] py-8 gap-4 md:gap-0 text-white font-sans">
+    <nav className={`absolute left-0 w-full z-50 flex flex-col md:flex-row justify-between items-center px-[5%] py-8 gap-4 md:gap-0 text-white font-sans ${announcementBannerData?.enabled ? 'top-24' : 'top-0'}`}>
       <div className="text-2xl font-bold tracking-wide">
         <Link to="/">MyBld</Link>
       </div>
