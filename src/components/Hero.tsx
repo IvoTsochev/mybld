@@ -1,12 +1,16 @@
 import heroBg from "../assets/hero.jpg";
 import { urlFor } from "../sanity.client";
 import { useHeroData } from "../hooks/useSanityData";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   const { data: heroData } = useHeroData();
 
-  const bgImage = heroData?.backgroundImage ? urlFor(heroData.backgroundImage).width(1920).height(1080).url() : heroBg;
-  const bgImageAlt = heroData?.backgroundImage?.Alt || 'Hero Background Image';
+  const bgImage = heroData?.backgroundImage
+    ? urlFor(heroData.backgroundImage).width(1920).height(1080).url()
+    : heroBg;
+  const bgImageAlt =
+    heroData?.backgroundImage?.altText || "Hero Background Image";
 
   return (
     <div
@@ -19,16 +23,19 @@ export const Hero = () => {
       <div className="relative z-20 grow flex flex-col justify-center items-center text-center px-5">
         {heroData ? (
           <>
-            <h1 
+            <h1
               className="text-4xl md:text-6xl font-extrabold leading-[1.2] mb-6 drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
               dangerouslySetInnerHTML={{ __html: heroData.title || "" }}
             />
             <p className="text-base md:text-lg font-normal text-gray-300 mb-12 max-w-200 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
               {heroData.description}
             </p>
-            <button className="bg-linear-to-br from-[#ff8a65] to-[#ff7043] text-white py-4 px-10 text-base font-semibold rounded shadow-[0_4px_15px_rgba(255,112,67,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(255,112,67,0.6)]">
+            <Link
+              to={"/#contacts"}
+              className="bg-linear-to-br from-[#ff8a65] to-[#ff7043] text-white py-4 px-10 text-base font-semibold rounded shadow-[0_4px_15px_rgba(255,112,67,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(255,112,67,0.6)]"
+            >
               {heroData.buttonText || "ЗАПИТВАНЕ ЗА ОГЛЕД"}
-            </button>
+            </Link>
           </>
         ) : null}
       </div>

@@ -6,6 +6,7 @@ const homePageSections = [
   { type: 'servicesSection', title: 'Services Section' },
   { type: 'aboutUs', title: 'About Us Section' },
   { type: 'contactUs', title: 'Contact Us Section' },
+  { type: 'featuredProjects', title: 'Featured Projects Section' },
 ] as const
 
 export const structure: StructureResolver = (S) =>
@@ -29,6 +30,15 @@ export const structure: StructureResolver = (S) =>
                   ),
               ),
             ),
+        ),
+      S.divider(),
+      S.listItem()
+        .title('Projects Page')
+        .child(
+          S.document()
+            .schemaType('projectsPage')
+            .documentId('projectsPage')
+            .title('Projects Page'),
         ),
       S.divider(),
       S.listItem()
@@ -56,5 +66,5 @@ export const structure: StructureResolver = (S) =>
             .title('Announcement Banner'),
         ),
       // When the project schema is added, uncomment:
-      // S.documentTypeListItem('project').title('Projects'),
+      S.documentTypeListItem('project').title('Projects'),
     ])

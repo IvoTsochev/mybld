@@ -1,18 +1,11 @@
 import { ArrowRight, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-// Dummy content — will be driven by Sanity (enabled flag + text) in step 2
-const DUMMY_BANNER = {
-  enabled: true,
-  badge: 'Варна, България',
-  message:
-    'Търсим подходящ имот за закупуване във Варна. Ако имате предложение — свържете се с нас!',
-  linkText: 'Свържете се с нас',
-  linkUrl: '/#contacts',
-};
+import { useAnnouncementBannerData } from '../hooks/useSanityData';
 
 export const AnnouncementBanner = () => {
-  if (!DUMMY_BANNER.enabled) return null;
+  const { data: sanityData, isLoading } = useAnnouncementBannerData();
+
+  if (isLoading || !sanityData || !sanityData.enabled) return null;
 
   return (
     <div
@@ -21,22 +14,28 @@ export const AnnouncementBanner = () => {
       aria-live="polite"
     >
       <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-center gap-3 px-[5%] py-4 text-center font-sans md:flex-row md:gap-6 md:py-3.5 md:text-left">
-        <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-bold uppercase tracking-wide text-[#ff7043] shadow-sm">
-          <MapPin size={16} aria-hidden />
-          {DUMMY_BANNER.badge}
-        </span>
+        {sanityData.badge && (
+          <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-bold uppercase tracking-wide text-[#ff7043] shadow-sm">
+            <MapPin size={16} aria-hidden />
+            {sanityData.badge}
+          </span>
+        )}
 
-        <p className="max-w-2xl text-base font-semibold leading-relaxed text-white md:text-lg">
-          {DUMMY_BANNER.message}
-        </p>
+        {sanityData.message && (
+          <p className="max-w-2xl text-base font-semibold leading-relaxed text-white md:text-lg">
+            {sanityData.message}
+          </p>
+        )}
 
-        <Link
-          to={DUMMY_BANNER.linkUrl}
-          className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-[#ff7043] shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#fff8f5] hover:shadow-lg"
-        >
-          {DUMMY_BANNER.linkText}
-          <ArrowRight size={16} aria-hidden />
-        </Link>
+        {sanityData.linkText && sanityData.linkUrl && (
+          <Link
+            to={sanityData.linkUrl}
+            className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-[#ff7043] shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#fff8f5] hover:shadow-lg"
+          >
+            {sanityData.linkText}
+            <ArrowRight size={16} aria-hidden />
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -22,6 +22,178 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
+export type ProjectsPage = {
+  _id: string;
+  _type: "projectsPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type ProjectReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "project";
+};
+
+export type FeaturedProjects = {
+  _id: string;
+  _type: "featuredProjects";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  projects?: Array<
+    {
+      _key: string;
+    } & ProjectReference
+  >;
+};
+
+export type Project = {
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  mainImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  briefDescription?: string;
+  images?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  fullDescription?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
+export type AnnouncementBanner = {
+  _id: string;
+  _type: "announcementBanner";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  enabled?: boolean;
+  badge?: string;
+  message?: string;
+  linkText?: string;
+  linkUrl?: string;
+};
+
+export type Footer = {
+  _id: string;
+  _type: "footer";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  copyright?: string;
+};
+
+export type Navigation = {
+  _id: string;
+  _type: "navigation";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  menuItems?: Array<{
+    name?: string;
+    link?: string;
+    _key: string;
+  }>;
+};
+
+export type ContactUs = {
+  _id: string;
+  _type: "contactUs";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  phone?: string;
+  email?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+};
+
+export type AboutUs = {
+  _id: string;
+  _type: "aboutUs";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+};
+
 export type ServicesSection = {
   _id: string;
   _type: "servicesSection";
@@ -43,22 +215,6 @@ export type ServicesSection = {
   }>;
 };
 
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
 export type HowWeWork = {
   _id: string;
   _type: "howWeWork";
@@ -71,6 +227,14 @@ export type HowWeWork = {
     stepDescription?: string;
     _key: string;
   }>;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
 };
 
 export type Hero = {
@@ -87,6 +251,7 @@ export type Hero = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    altText?: string;
     _type: "image";
   };
 };
@@ -196,9 +361,18 @@ export type Slug = {
 
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
-  | ServicesSection
+  | ProjectsPage
   | SanityImageCrop
   | SanityImageHotspot
+  | ProjectReference
+  | FeaturedProjects
+  | Project
+  | AnnouncementBanner
+  | Footer
+  | Navigation
+  | ContactUs
+  | AboutUs
+  | ServicesSection
   | HowWeWork
   | Hero
   | SanityImagePaletteSwatch
@@ -213,9 +387,9 @@ export type AllSanitySchemaTypes =
 
 // Source: src/hooks/useSanityData.ts
 // Variable: HERO_QUERY
-// Query: *[_type == "hero"][0]
+// Query: *[_type == "hero" && _id == "hero"][0]
 export type HERO_QUERY_RESULT = {
-  _id: string;
+  _id: "hero";
   _type: "hero";
   _createdAt: string;
   _updatedAt: string;
@@ -228,15 +402,16 @@ export type HERO_QUERY_RESULT = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    altText?: string;
     _type: "image";
   };
 } | null;
 
 // Source: src/hooks/useSanityData.ts
 // Variable: HOW_WE_WORK_QUERY
-// Query: *[_type == "howWeWork"][0]
+// Query: *[_type == "howWeWork" && _id == "howWeWork"][0]
 export type HOW_WE_WORK_QUERY_RESULT = {
-  _id: string;
+  _id: "howWeWork";
   _type: "howWeWork";
   _createdAt: string;
   _updatedAt: string;
@@ -247,13 +422,21 @@ export type HOW_WE_WORK_QUERY_RESULT = {
     stepDescription?: string;
     _key: string;
   }>;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
 } | null;
 
 // Source: src/hooks/useSanityData.ts
 // Variable: SERVICES_QUERY
-// Query: *[_type == "servicesSection"][0]
+// Query: *[_type == "servicesSection" && _id == "servicesSection"][0]
 export type SERVICES_QUERY_RESULT = {
-  _id: string;
+  _id: "servicesSection";
   _type: "servicesSection";
   _createdAt: string;
   _updatedAt: string;
@@ -275,34 +458,195 @@ export type SERVICES_QUERY_RESULT = {
 
 // Source: src/hooks/useSanityData.ts
 // Variable: ABOUT_US_QUERY
-// Query: *[_type == "aboutUs"][0]
-export type ABOUT_US_QUERY_RESULT = null;
+// Query: *[_type == "aboutUs" && _id == "aboutUs"][0]
+export type ABOUT_US_QUERY_RESULT = {
+  _id: "aboutUs";
+  _type: "aboutUs";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+} | null;
 
 // Source: src/hooks/useSanityData.ts
 // Variable: CONTACT_US_QUERY
-// Query: *[_type == "contactUs"][0]
-export type CONTACT_US_QUERY_RESULT = null;
+// Query: *[_type == "contactUs" && _id == "contactUs"][0]
+export type CONTACT_US_QUERY_RESULT = {
+  _id: "contactUs";
+  _type: "contactUs";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  phone?: string;
+  email?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+} | null;
 
 // Source: src/hooks/useSanityData.ts
 // Variable: NAVIGATION_QUERY
-// Query: *[_type == "navigation"][0]
-export type NAVIGATION_QUERY_RESULT = null;
+// Query: *[_type == "navigation" && _id == "navigation"][0]
+export type NAVIGATION_QUERY_RESULT = {
+  _id: "navigation";
+  _type: "navigation";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  menuItems?: Array<{
+    name?: string;
+    link?: string;
+    _key: string;
+  }>;
+} | null;
 
 // Source: src/hooks/useSanityData.ts
 // Variable: FOOTER_QUERY
-// Query: *[_type == "footer"][0]
-export type FOOTER_QUERY_RESULT = null;
+// Query: *[_type == "footer" && _id == "footer"][0]
+export type FOOTER_QUERY_RESULT = {
+  _id: "footer";
+  _type: "footer";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  copyright?: string;
+} | null;
+
+// Source: src/hooks/useSanityData.ts
+// Variable: ANNOUNCEMENT_BANNER_QUERY
+// Query: *[_type == "announcementBanner" && _id == "announcementBanner"][0]
+export type ANNOUNCEMENT_BANNER_QUERY_RESULT = {
+  _id: "announcementBanner";
+  _type: "announcementBanner";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  enabled?: boolean;
+  badge?: string;
+  message?: string;
+  linkText?: string;
+  linkUrl?: string;
+} | null;
+
+// Source: src/hooks/useSanityData.ts
+// Variable: FEATURED_PROJECTS_QUERY
+// Query: *[_type == "featuredProjects" && _id == "featuredProjects"][0]{  ...,  projects[]->{    _id,    title,    briefDescription,    mainImage {      asset->{        url      }    }  }}
+export type FEATURED_PROJECTS_QUERY_RESULT = {
+  _id: "featuredProjects";
+  _type: "featuredProjects";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  projects: Array<{
+    _id: string;
+    title: string | null;
+    briefDescription: string | null;
+    mainImage: {
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+  }> | null;
+} | null;
+
+// Source: src/hooks/useSanityData.ts
+// Variable: PROJECTS_PAGE_QUERY
+// Query: *[_type == "projectsPage" && _id == "projectsPage"][0]{  title,  description,  backgroundImage {    asset->{      url    }  }}
+export type PROJECTS_PAGE_QUERY_RESULT = {
+  title: string | null;
+  description: string | null;
+  backgroundImage: {
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+} | null;
+
+// Source: src/hooks/useSanityData.ts
+// Variable: ALL_PROJECTS_QUERY
+// Query: *[_type == "project"] | order(_createdAt desc){  _id,  title,  briefDescription,  mainImage {    asset->{      url    }  }}
+export type ALL_PROJECTS_QUERY_RESULT = Array<{
+  _id: string;
+  title: string | null;
+  briefDescription: string | null;
+  mainImage: {
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+}>;
+
+// Source: src/hooks/useSanityData.ts
+// Variable: PROJECT_BY_ID_QUERY
+// Query: *[_type == "project" && _id == $id][0]{  _id,  title,  briefDescription,  fullDescription,  mainImage {    asset->{      url    }  },  images[] {    asset->{      url    }  }}
+export type PROJECT_BY_ID_QUERY_RESULT = {
+  _id: string;
+  title: string | null;
+  briefDescription: string | null;
+  fullDescription: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  mainImage: {
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+  images: Array<{
+    asset: {
+      url: string | null;
+    } | null;
+  }> | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "hero"][0]': HERO_QUERY_RESULT;
-    '*[_type == "howWeWork"][0]': HOW_WE_WORK_QUERY_RESULT;
-    '*[_type == "servicesSection"][0]': SERVICES_QUERY_RESULT;
-    '*[_type == "aboutUs"][0]': ABOUT_US_QUERY_RESULT;
-    '*[_type == "contactUs"][0]': CONTACT_US_QUERY_RESULT;
-    '*[_type == "navigation"][0]': NAVIGATION_QUERY_RESULT;
-    '*[_type == "footer"][0]': FOOTER_QUERY_RESULT;
+    '*[_type == "hero" && _id == "hero"][0]': HERO_QUERY_RESULT;
+    '*[_type == "howWeWork" && _id == "howWeWork"][0]': HOW_WE_WORK_QUERY_RESULT;
+    '*[_type == "servicesSection" && _id == "servicesSection"][0]': SERVICES_QUERY_RESULT;
+    '*[_type == "aboutUs" && _id == "aboutUs"][0]': ABOUT_US_QUERY_RESULT;
+    '*[_type == "contactUs" && _id == "contactUs"][0]': CONTACT_US_QUERY_RESULT;
+    '*[_type == "navigation" && _id == "navigation"][0]': NAVIGATION_QUERY_RESULT;
+    '*[_type == "footer" && _id == "footer"][0]': FOOTER_QUERY_RESULT;
+    '*[_type == "announcementBanner" && _id == "announcementBanner"][0]': ANNOUNCEMENT_BANNER_QUERY_RESULT;
+    '*[_type == "featuredProjects" && _id == "featuredProjects"][0]{\n  ...,\n  projects[]->{\n    _id,\n    title,\n    briefDescription,\n    mainImage {\n      asset->{\n        url\n      }\n    }\n  }\n}': FEATURED_PROJECTS_QUERY_RESULT;
+    '*[_type == "projectsPage" && _id == "projectsPage"][0]{\n  title,\n  description,\n  backgroundImage {\n    asset->{\n      url\n    }\n  }\n}': PROJECTS_PAGE_QUERY_RESULT;
+    '*[_type == "project"] | order(_createdAt desc){\n  _id,\n  title,\n  briefDescription,\n  mainImage {\n    asset->{\n      url\n    }\n  }\n}': ALL_PROJECTS_QUERY_RESULT;
+    '*[_type == "project" && _id == $id][0]{\n  _id,\n  title,\n  briefDescription,\n  fullDescription,\n  mainImage {\n    asset->{\n      url\n    }\n  },\n  images[] {\n    asset->{\n      url\n    }\n  }\n}': PROJECT_BY_ID_QUERY_RESULT;
   }
 }
