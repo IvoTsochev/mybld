@@ -28,3 +28,4 @@ jobs:
           username: ivo.tsochev@mybld.bg
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./dist/
+          server-dir: public_html/
