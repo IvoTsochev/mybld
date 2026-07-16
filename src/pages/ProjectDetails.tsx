@@ -4,11 +4,14 @@ import { useProjectById } from "../hooks/useSanityData";
 import { PortableText } from "@portabletext/react";
 import { ImageSkeleton } from "../components/ImageSkeleton";
 import { ImageLightbox } from "../components/ImageLightbox";
+import { useLanguage } from "../context/LanguageContext";
+import { getLocalizedField } from "../lib/i18n";
 
 export const ProjectDetails = () => {
   const { id } = useParams();
   const { data: project, isLoading } = useProjectById(id);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const { locale } = useLanguage();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -46,6 +49,11 @@ export const ProjectDetails = () => {
     );
   }
 
+  const title = getLocalizedField(project, "title", locale);
+  const briefDescription = getLocalizedField(project, "briefDescription", locale);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Portable Text blocks, matches the loose typing already used for Sanity data elsewhere in this file
+  const fullDescription = getLocalizedField<any[]>(project, "fullDescription", locale);
+
   return (
     <div className="min-h-screen bg-white font-sans pb-24">
       {/* Hero Header */}
@@ -53,7 +61,7 @@ export const ProjectDetails = () => {
         {project.mainImage?.asset?.url ? (
           <img
             src={project?.mainImage.asset.url}
-            alt={project?.title || "Image"}
+            alt={title || "Image"}
             className="w-full h-full object-cover opacity-80"
           />
         ) : (
@@ -81,7 +89,7 @@ export const ProjectDetails = () => {
             Всички проекти
           </Link>
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg">
-            {project.title}
+            {title}
           </h1>
           <div className="w-20 h-1.5 bg-[#ff7043] rounded-sm"></div>
         </div>
@@ -90,11 +98,11 @@ export const ProjectDetails = () => {
       <div className="max-w-6xl mx-auto px-[5%] mt-16">
         {/* Main Content (Portable Text) */}
         <div className="w-full prose prose-lg prose-headings:text-[#1a1a24] prose-a:text-[#ff7043] max-w-none text-gray-700 leading-relaxed">
-          {project.fullDescription ? (
-            <PortableText value={project.fullDescription} />
+          {fullDescription ? (
+            <PortableText value={fullDescription} />
           ) : (
             <p className="text-xl leading-relaxed text-gray-600">
-              {project.briefDescription}
+              {briefDescription}
             </p>
           )}
         </div>
@@ -120,7 +128,7 @@ export const ProjectDetails = () => {
                   <>
                     <img
                       src={image.asset.url}
-                      alt={`${project.title} - \u0421\u043D\u0438\u043C\u043A\u0430 ${index + 1}`}
+                      alt={`${title} - \u0421\u043D\u0438\u043C\u043A\u0430 ${index + 1}`}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">

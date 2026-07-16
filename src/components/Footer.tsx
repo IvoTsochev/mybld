@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import { useFooterData, useNavigationData } from "../hooks/useSanityData";
+import { useLanguage } from "../context/LanguageContext";
+import { getLocalizedField } from "../lib/i18n";
 
 const toNavLink = (link: string) => (link.startsWith("#") ? `/${link}` : link);
 
 export const Footer = () => {
   const { data: footerData } = useNavigationData();
   const { data: footerData2 } = useFooterData();
+  const { locale } = useLanguage();
 
   return (
     <footer className="bg-[#1a1a24] text-[#e0e0e0] py-12 px-[5%] font-sans">
@@ -20,12 +23,13 @@ export const Footer = () => {
               to={item.link ? toNavLink(item.link) : "/"}
               className="hover:text-[#ff7a59] transition-colors text-sm"
             >
-              {item.name}
+              {getLocalizedField(item, "name", locale)}
             </Link>
           ))}
         </div>
         <p className="text-sm text-gray-500">
-          &copy; {new Date().getFullYear()} {footerData2?.copyright}
+          &copy; {new Date().getFullYear()}{" "}
+          {getLocalizedField(footerData2, "copyright", locale)}
         </p>
       </div>
     </footer>

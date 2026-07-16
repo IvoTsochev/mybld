@@ -9,6 +9,7 @@ import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import SanityStudio from "./pages/SanityStudio";
 import { useAnnouncementBannerData } from "./hooks/useSanityData";
+import { LanguageProvider } from "./context/LanguageContext";
 
 const Layout = () => {
   const location = useLocation();
@@ -25,12 +26,14 @@ const Layout = () => {
   }, [location]);
 
   return (
-    <div className="relative">
-      {announcementBannerData?.enabled && <AnnouncementBanner />}
-      <Navigation />
-      <Outlet />
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="relative">
+        {announcementBannerData?.enabled && <AnnouncementBanner />}
+        <Navigation />
+        <Outlet />
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 };
 

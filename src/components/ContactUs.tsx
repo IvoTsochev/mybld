@@ -2,9 +2,12 @@ import { Phone, Mail } from 'lucide-react';
 import womanImg from '../assets/woman.jpg';
 import { useContactUsData } from '../hooks/useSanityData';
 import { urlFor } from '../sanity.client';
+import { useLanguage } from '../context/LanguageContext';
+import { getLocalizedField } from '../lib/i18n';
 
 export const ContactUs = () => {
   const { data: contactUsData } = useContactUsData();
+  const { locale } = useLanguage();
 
   return (
     <section className="w-full bg-white text-[#333] font-sans flex" id="contacts">
@@ -18,11 +21,11 @@ export const ContactUs = () => {
         {/* Text Section - Right on desktop, bottom on mobile */}
         <div className="flex-none lg:w-1/2 w-full flex flex-col justify-center py-20 px-[6%] box-border">
           <h2 className="text-[2rem] lg:text-[2.5rem] font-extrabold text-[#1a1a24] mb-6">
-            {contactUsData?.title}
+            {getLocalizedField(contactUsData, "title", locale)}
           </h2>
-          
+
           <p className="text-[0.95rem] leading-relaxed text-[#555] mb-10 max-w-150">
-            {contactUsData?.description}
+            {getLocalizedField(contactUsData, "description", locale)}
           </p>
           
           <div className="flex flex-col gap-6">

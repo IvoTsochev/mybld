@@ -5,15 +5,18 @@ import {
   useProjectsPageData,
   useAllProjectsData,
 } from "../hooks/useSanityData";
+import { useLanguage } from "../context/LanguageContext";
+import { getLocalizedField } from "../lib/i18n";
 
 export const Projects = () => {
   const { data: pageData, isLoading: isPageLoading } = useProjectsPageData();
   const { data: projectsData, isLoading: isProjectsLoading } =
     useAllProjectsData();
+  const { locale } = useLanguage();
 
-  const title = pageData?.title || "Нашите Проекти";
+  const title = getLocalizedField(pageData, "title", locale) || "Нашите Проекти";
   const description =
-    pageData?.description ||
+    getLocalizedField(pageData, "description", locale) ||
     "Разгледайте част от успешно реализираните ни обекти, които доказват нашето качество и прецизност.";
   const bgImage = pageData?.backgroundImage?.asset?.url || materialsBg;
 
@@ -65,7 +68,10 @@ export const Projects = () => {
                   </div>
                 </div>
               ))
-            : projectsData?.map((project: any) => (
+            : projectsData?.map((project: any) => {
+                const projectTitle = getLocalizedField(project, "title", locale);
+                const projectBriefDescription = getLocalizedField(project, "briefDescription", locale);
+                return (
                 <Link
                   to={`/projects/${project._id}`}
                   key={project._id}
@@ -76,7 +82,7 @@ export const Projects = () => {
                     {project.mainImage?.asset?.url ? (
                       <img
                         src={project.mainImage.asset.url}
-                        alt={project.title}
+                        alt={projectTitle}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     ) : (
@@ -90,10 +96,10 @@ export const Projects = () => {
                   {/* Content Container */}
                   <div className="p-10 flex flex-col flex-grow">
                     <h3 className="text-2xl font-bold text-[#1a1a24] mb-4 group-hover:text-[#ff7043] transition-colors">
-                      {project.title}
+                      {projectTitle}
                     </h3>
                     <p className="text-[#666666] leading-relaxed mb-8 flex-grow">
-                      {project.briefDescription}
+                      {projectBriefDescription}
                     </p>
 
                     {/* Visual anchor / pseudo-button */}
@@ -118,7 +124,8 @@ export const Projects = () => {
                     </div>
                   </div>
                 </Link>
-              ))}
+                );
+              })}
         </div>
       </div>
     </div>

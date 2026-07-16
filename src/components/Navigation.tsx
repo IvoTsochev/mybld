@@ -3,12 +3,16 @@ import {
   useAnnouncementBannerData,
   useNavigationData,
 } from "../hooks/useSanityData";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useLanguage } from "../context/LanguageContext";
+import { getLocalizedField } from "../lib/i18n";
 
 const toNavLink = (link: string) => (link.startsWith("#") ? `/${link}` : link);
 
 export const Navigation = () => {
   const { data: navigationData } = useNavigationData();
   const { data: announcementBannerData } = useAnnouncementBannerData();
+  const { locale } = useLanguage();
 
   return (
     <nav
@@ -24,11 +28,12 @@ export const Navigation = () => {
               to={item.link ? toNavLink(item.link) : "/"}
               className="text-[#e0e0e0] text-sm font-medium transition-colors duration-300 pb-1 hover:text-white hover:border-b-2 hover:border-[#ff7a59]/80"
             >
-              {item.name}
+              {getLocalizedField(item, "name", locale)}
             </Link>
           </li>
         ))}
       </ul>
+      <LanguageSwitcher />
     </nav>
   );
 };

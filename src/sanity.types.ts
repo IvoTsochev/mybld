@@ -29,7 +29,11 @@ export type ProjectsPage = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   description?: string;
+  descriptionEn?: string;
+  descriptionRu?: string;
   backgroundImage?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -69,7 +73,11 @@ export type FeaturedProjects = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   description?: string;
+  descriptionEn?: string;
+  descriptionRu?: string;
   projects?: Array<
     {
       _key: string;
@@ -84,6 +92,8 @@ export type Project = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   mainImage?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -92,6 +102,8 @@ export type Project = {
     _type: "image";
   };
   briefDescription?: string;
+  briefDescriptionEn?: string;
+  briefDescriptionRu?: string;
   images?: Array<{
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -101,6 +113,42 @@ export type Project = {
     _key: string;
   }>;
   fullDescription?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  fullDescriptionEn?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  fullDescriptionRu?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -128,8 +176,14 @@ export type AnnouncementBanner = {
   _rev: string;
   enabled?: boolean;
   badge?: string;
+  badgeEn?: string;
+  badgeRu?: string;
   message?: string;
+  messageEn?: string;
+  messageRu?: string;
   linkText?: string;
+  linkTextEn?: string;
+  linkTextRu?: string;
   linkUrl?: string;
 };
 
@@ -140,6 +194,8 @@ export type Footer = {
   _updatedAt: string;
   _rev: string;
   copyright?: string;
+  copyrightEn?: string;
+  copyrightRu?: string;
 };
 
 export type Navigation = {
@@ -150,6 +206,8 @@ export type Navigation = {
   _rev: string;
   menuItems?: Array<{
     name?: string;
+    nameEn?: string;
+    nameRu?: string;
     link?: string;
     _key: string;
   }>;
@@ -162,7 +220,11 @@ export type ContactUs = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   description?: string;
+  descriptionEn?: string;
+  descriptionRu?: string;
   phone?: string;
   email?: string;
   image?: {
@@ -182,8 +244,14 @@ export type AboutUs = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   subtitle?: string;
+  subtitleEn?: string;
+  subtitleRu?: string;
   description?: string;
+  descriptionEn?: string;
+  descriptionRu?: string;
   image?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -201,6 +269,8 @@ export type ServicesSection = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   servicesTypes?: Array<{
     icon?: {
       asset?: SanityImageAssetReference;
@@ -210,7 +280,11 @@ export type ServicesSection = {
       _type: "image";
     };
     name?: string;
+    nameEn?: string;
+    nameRu?: string;
     description?: string;
+    descriptionEn?: string;
+    descriptionRu?: string;
     _key: string;
   }>;
 };
@@ -222,9 +296,15 @@ export type HowWeWork = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   subtitle?: string;
+  subtitleEn?: string;
+  subtitleRu?: string;
   steps?: Array<{
     stepDescription?: string;
+    stepDescriptionEn?: string;
+    stepDescriptionRu?: string;
     _key: string;
   }>;
   image?: {
@@ -244,8 +324,14 @@ export type Hero = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   description?: string;
+  descriptionEn?: string;
+  descriptionRu?: string;
   buttonText?: string;
+  buttonTextEn?: string;
+  buttonTextRu?: string;
   backgroundImage?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -395,8 +481,14 @@ export type HERO_QUERY_RESULT = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   description?: string;
+  descriptionEn?: string;
+  descriptionRu?: string;
   buttonText?: string;
+  buttonTextEn?: string;
+  buttonTextRu?: string;
   backgroundImage?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -417,9 +509,15 @@ export type HOW_WE_WORK_QUERY_RESULT = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   subtitle?: string;
+  subtitleEn?: string;
+  subtitleRu?: string;
   steps?: Array<{
     stepDescription?: string;
+    stepDescriptionEn?: string;
+    stepDescriptionRu?: string;
     _key: string;
   }>;
   image?: {
@@ -442,6 +540,8 @@ export type SERVICES_QUERY_RESULT = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   servicesTypes?: Array<{
     icon?: {
       asset?: SanityImageAssetReference;
@@ -451,7 +551,11 @@ export type SERVICES_QUERY_RESULT = {
       _type: "image";
     };
     name?: string;
+    nameEn?: string;
+    nameRu?: string;
     description?: string;
+    descriptionEn?: string;
+    descriptionRu?: string;
     _key: string;
   }>;
 } | null;
@@ -466,8 +570,14 @@ export type ABOUT_US_QUERY_RESULT = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   subtitle?: string;
+  subtitleEn?: string;
+  subtitleRu?: string;
   description?: string;
+  descriptionEn?: string;
+  descriptionRu?: string;
   image?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -488,7 +598,11 @@ export type CONTACT_US_QUERY_RESULT = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   description?: string;
+  descriptionEn?: string;
+  descriptionRu?: string;
   phone?: string;
   email?: string;
   image?: {
@@ -512,6 +626,8 @@ export type NAVIGATION_QUERY_RESULT = {
   _rev: string;
   menuItems?: Array<{
     name?: string;
+    nameEn?: string;
+    nameRu?: string;
     link?: string;
     _key: string;
   }>;
@@ -527,6 +643,8 @@ export type FOOTER_QUERY_RESULT = {
   _updatedAt: string;
   _rev: string;
   copyright?: string;
+  copyrightEn?: string;
+  copyrightRu?: string;
 } | null;
 
 // Source: src/hooks/useSanityData.ts
@@ -540,14 +658,20 @@ export type ANNOUNCEMENT_BANNER_QUERY_RESULT = {
   _rev: string;
   enabled?: boolean;
   badge?: string;
+  badgeEn?: string;
+  badgeRu?: string;
   message?: string;
+  messageEn?: string;
+  messageRu?: string;
   linkText?: string;
+  linkTextEn?: string;
+  linkTextRu?: string;
   linkUrl?: string;
 } | null;
 
 // Source: src/hooks/useSanityData.ts
 // Variable: FEATURED_PROJECTS_QUERY
-// Query: *[_type == "featuredProjects" && _id == "featuredProjects"][0]{  ...,  projects[]->{    _id,    title,    briefDescription,    mainImage {      asset->{        url      }    }  }}
+// Query: *[_type == "featuredProjects" && _id == "featuredProjects"][0]{  ...,  projects[]->{    _id,    title,    titleEn,    titleRu,    briefDescription,    briefDescriptionEn,    briefDescriptionRu,    mainImage {      asset->{        url      }    }  }}
 export type FEATURED_PROJECTS_QUERY_RESULT = {
   _id: "featuredProjects";
   _type: "featuredProjects";
@@ -555,11 +679,19 @@ export type FEATURED_PROJECTS_QUERY_RESULT = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleEn?: string;
+  titleRu?: string;
   description?: string;
+  descriptionEn?: string;
+  descriptionRu?: string;
   projects: Array<{
     _id: string;
     title: string | null;
+    titleEn: string | null;
+    titleRu: string | null;
     briefDescription: string | null;
+    briefDescriptionEn: string | null;
+    briefDescriptionRu: string | null;
     mainImage: {
       asset: {
         url: string | null;
@@ -570,10 +702,14 @@ export type FEATURED_PROJECTS_QUERY_RESULT = {
 
 // Source: src/hooks/useSanityData.ts
 // Variable: PROJECTS_PAGE_QUERY
-// Query: *[_type == "projectsPage" && _id == "projectsPage"][0]{  title,  description,  backgroundImage {    asset->{      url    }  }}
+// Query: *[_type == "projectsPage" && _id == "projectsPage"][0]{  title,  titleEn,  titleRu,  description,  descriptionEn,  descriptionRu,  backgroundImage {    asset->{      url    }  }}
 export type PROJECTS_PAGE_QUERY_RESULT = {
   title: string | null;
+  titleEn: string | null;
+  titleRu: string | null;
   description: string | null;
+  descriptionEn: string | null;
+  descriptionRu: string | null;
   backgroundImage: {
     asset: {
       url: string | null;
@@ -583,11 +719,15 @@ export type PROJECTS_PAGE_QUERY_RESULT = {
 
 // Source: src/hooks/useSanityData.ts
 // Variable: ALL_PROJECTS_QUERY
-// Query: *[_type == "project"] | order(_createdAt desc){  _id,  title,  briefDescription,  mainImage {    asset->{      url    }  }}
+// Query: *[_type == "project"] | order(_createdAt desc){  _id,  title,  titleEn,  titleRu,  briefDescription,  briefDescriptionEn,  briefDescriptionRu,  mainImage {    asset->{      url    }  }}
 export type ALL_PROJECTS_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
+  titleEn: string | null;
+  titleRu: string | null;
   briefDescription: string | null;
+  briefDescriptionEn: string | null;
+  briefDescriptionRu: string | null;
   mainImage: {
     asset: {
       url: string | null;
@@ -597,12 +737,52 @@ export type ALL_PROJECTS_QUERY_RESULT = Array<{
 
 // Source: src/hooks/useSanityData.ts
 // Variable: PROJECT_BY_ID_QUERY
-// Query: *[_type == "project" && _id == $id][0]{  _id,  title,  briefDescription,  fullDescription,  mainImage {    asset->{      url    }  },  images[] {    asset->{      url    }  }}
+// Query: *[_type == "project" && _id == $id][0]{  _id,  title,  titleEn,  titleRu,  briefDescription,  briefDescriptionEn,  briefDescriptionRu,  fullDescription,  fullDescriptionEn,  fullDescriptionRu,  mainImage {    asset->{      url    }  },  images[] {    asset->{      url    }  }}
 export type PROJECT_BY_ID_QUERY_RESULT = {
   _id: string;
   title: string | null;
+  titleEn: string | null;
+  titleRu: string | null;
   briefDescription: string | null;
+  briefDescriptionEn: string | null;
+  briefDescriptionRu: string | null;
   fullDescription: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  fullDescriptionEn: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  fullDescriptionRu: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -644,9 +824,9 @@ declare module "@sanity/client" {
     '*[_type == "navigation" && _id == "navigation"][0]': NAVIGATION_QUERY_RESULT;
     '*[_type == "footer" && _id == "footer"][0]': FOOTER_QUERY_RESULT;
     '*[_type == "announcementBanner" && _id == "announcementBanner"][0]': ANNOUNCEMENT_BANNER_QUERY_RESULT;
-    '*[_type == "featuredProjects" && _id == "featuredProjects"][0]{\n  ...,\n  projects[]->{\n    _id,\n    title,\n    briefDescription,\n    mainImage {\n      asset->{\n        url\n      }\n    }\n  }\n}': FEATURED_PROJECTS_QUERY_RESULT;
-    '*[_type == "projectsPage" && _id == "projectsPage"][0]{\n  title,\n  description,\n  backgroundImage {\n    asset->{\n      url\n    }\n  }\n}': PROJECTS_PAGE_QUERY_RESULT;
-    '*[_type == "project"] | order(_createdAt desc){\n  _id,\n  title,\n  briefDescription,\n  mainImage {\n    asset->{\n      url\n    }\n  }\n}': ALL_PROJECTS_QUERY_RESULT;
-    '*[_type == "project" && _id == $id][0]{\n  _id,\n  title,\n  briefDescription,\n  fullDescription,\n  mainImage {\n    asset->{\n      url\n    }\n  },\n  images[] {\n    asset->{\n      url\n    }\n  }\n}': PROJECT_BY_ID_QUERY_RESULT;
+    '*[_type == "featuredProjects" && _id == "featuredProjects"][0]{\n  ...,\n  projects[]->{\n    _id,\n    title,\n    titleEn,\n    titleRu,\n    briefDescription,\n    briefDescriptionEn,\n    briefDescriptionRu,\n    mainImage {\n      asset->{\n        url\n      }\n    }\n  }\n}': FEATURED_PROJECTS_QUERY_RESULT;
+    '*[_type == "projectsPage" && _id == "projectsPage"][0]{\n  title,\n  titleEn,\n  titleRu,\n  description,\n  descriptionEn,\n  descriptionRu,\n  backgroundImage {\n    asset->{\n      url\n    }\n  }\n}': PROJECTS_PAGE_QUERY_RESULT;
+    '*[_type == "project"] | order(_createdAt desc){\n  _id,\n  title,\n  titleEn,\n  titleRu,\n  briefDescription,\n  briefDescriptionEn,\n  briefDescriptionRu,\n  mainImage {\n    asset->{\n      url\n    }\n  }\n}': ALL_PROJECTS_QUERY_RESULT;
+    '*[_type == "project" && _id == $id][0]{\n  _id,\n  title,\n  titleEn,\n  titleRu,\n  briefDescription,\n  briefDescriptionEn,\n  briefDescriptionRu,\n  fullDescription,\n  fullDescriptionEn,\n  fullDescriptionRu,\n  mainImage {\n    asset->{\n      url\n    }\n  },\n  images[] {\n    asset->{\n      url\n    }\n  }\n}': PROJECT_BY_ID_QUERY_RESULT;
   }
 }

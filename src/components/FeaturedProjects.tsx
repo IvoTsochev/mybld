@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { ImageSkeleton } from "./ImageSkeleton";
 import { useFeaturedProjectsData } from "../hooks/useSanityData";
+import { useLanguage } from "../context/LanguageContext";
+import { getLocalizedField } from "../lib/i18n";
 
 export const FeaturedProjects = () => {
   const { data: sanityData, isLoading } = useFeaturedProjectsData();
+  const { locale } = useLanguage();
 
   if (isLoading) {
     return (
@@ -30,8 +33,8 @@ export const FeaturedProjects = () => {
     );
   }
 
-  const title = sanityData?.title || "Избрани Проекти";
-  const description = sanityData?.description || "Разгледайте част от най-впечатляващите ни проекти, реализирани с безкомпромисно качество и внимание към детайла.";
+  const title = getLocalizedField(sanityData, "title", locale) || "Избрани Проекти";
+  const description = getLocalizedField(sanityData, "description", locale) || "Разгледайте част от най-впечатляващите ни проекти, реализирани с безкомпромисно качество и внимание към детайла.";
   const featuredProjects = sanityData?.projects || [];
 
   return (
@@ -48,7 +51,10 @@ export const FeaturedProjects = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {featuredProjects.map((project: any) => (
+          {featuredProjects.map((project: any) => {
+            const projectTitle = getLocalizedField(project, "title", locale);
+            const projectBriefDescription = getLocalizedField(project, "briefDescription", locale);
+            return (
             <Link
               to={`/projects/${project._id}`}
               key={project._id}
@@ -59,7 +65,7 @@ export const FeaturedProjects = () => {
                 {project.mainImage?.asset?.url ? (
                   <img
                     src={project.mainImage.asset.url}
-                    alt={project.title}
+                    alt={projectTitle}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (
@@ -73,10 +79,10 @@ export const FeaturedProjects = () => {
               {/* Content Container */}
               <div className="p-10 flex flex-col grow">
                 <h3 className="text-2xl font-bold text-[#1a1a24] mb-4 group-hover:text-[#ff7043] transition-colors">
-                  {project.title}
+                  {projectTitle}
                 </h3>
                 <p className="text-[#666666] leading-relaxed mb-8 grow">
-                  {project.briefDescription}
+                  {projectBriefDescription}
                 </p>
 
                 {/* Visual anchor / pseudo-button */}
@@ -103,7 +109,8 @@ export const FeaturedProjects = () => {
                 </div>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
         
         <div className="mt-16 flex justify-center">

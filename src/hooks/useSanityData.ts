@@ -105,7 +105,11 @@ const FEATURED_PROJECTS_QUERY = defineQuery(`*[_type == "featuredProjects" && _i
   projects[]->{
     _id,
     title,
+    titleEn,
+    titleRu,
     briefDescription,
+    briefDescriptionEn,
+    briefDescriptionRu,
     mainImage {
       asset->{
         url
@@ -126,7 +130,11 @@ export const useFeaturedProjectsData = () => {
 
 const PROJECTS_PAGE_QUERY = defineQuery(`*[_type == "projectsPage" && _id == "projectsPage"][0]{
   title,
+  titleEn,
+  titleRu,
   description,
+  descriptionEn,
+  descriptionRu,
   backgroundImage {
     asset->{
       url
@@ -147,7 +155,11 @@ export const useProjectsPageData = () => {
 const ALL_PROJECTS_QUERY = defineQuery(`*[_type == "project"] | order(_createdAt desc){
   _id,
   title,
+  titleEn,
+  titleRu,
   briefDescription,
+  briefDescriptionEn,
+  briefDescriptionRu,
   mainImage {
     asset->{
       url
@@ -168,8 +180,14 @@ export const useAllProjectsData = () => {
 const PROJECT_BY_ID_QUERY = defineQuery(`*[_type == "project" && _id == $id][0]{
   _id,
   title,
+  titleEn,
+  titleRu,
   briefDescription,
+  briefDescriptionEn,
+  briefDescriptionRu,
   fullDescription,
+  fullDescriptionEn,
+  fullDescriptionRu,
   mainImage {
     asset->{
       url
