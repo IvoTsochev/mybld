@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Projects } from "./pages/Projects";
@@ -14,6 +14,19 @@ import { LanguageProvider } from "./context/LanguageContext";
 const Layout = () => {
   const location = useLocation();
   const { data: announcementBannerData } = useAnnouncementBannerData();
+  const bannerRef = useRef<HTMLDivElement>(null);
+  const [bannerHeight, setBannerHeight] = useState(0);
+
+  useEffect(() => {
+    const el = bannerRef.current;
+    if (!el) return;
+
+    const observer = new ResizeObserver(([entry]) => {
+      setBannerHeight(entry.contentRect.height);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [announcementBannerData?.enabled]);
 
   useEffect(() => {
     if (!location.hash) return;
@@ -28,8 +41,10 @@ const Layout = () => {
   return (
     <LanguageProvider>
       <div className="relative">
-        {announcementBannerData?.enabled && <AnnouncementBanner />}
-        <Navigation />
+        <div ref={bannerRef}>
+          {announcementBannerData?.enabled && <AnnouncementBanner />}
+        </div>
+        <Navigation bannerHeight={bannerHeight} />
         <Outlet />
         <Footer />
       </div>

@@ -4,6 +4,7 @@ import { useProjectById } from "../hooks/useSanityData";
 import { PortableText } from "@portabletext/react";
 import { ImageSkeleton } from "../components/ImageSkeleton";
 import { ImageLightbox } from "../components/ImageLightbox";
+import { ProjectBanner } from "../components/ProjectBanner";
 import { useLanguage } from "../context/LanguageContext";
 import { getLocalizedField } from "../lib/i18n";
 
@@ -58,17 +59,15 @@ export const ProjectDetails = () => {
     <div className="min-h-screen bg-white font-sans pb-24">
       {/* Hero Header */}
       <div className="relative w-full h-[60vh] min-h-100 bg-gray-900">
-        {project.mainImage?.asset?.url ? (
-          <img
-            src={project?.mainImage.asset.url}
-            alt={title || "Image"}
-            className="w-full h-full object-cover opacity-80"
-          />
-        ) : (
-          <ImageSkeleton className="w-full h-full opacity-50" />
-        )}
-        <div className="absolute inset-0 bg-linear-to-t from-[#0a0f1e] to-transparent opacity-90"></div>
-        <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 max-w-6xl mx-auto">
+        <ProjectBanner
+          images={[
+            ...(project.mainImage ? [project.mainImage] : []),
+            ...(project.images ?? []),
+          ]}
+          alt={title || "Image"}
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-[#0a0f1e] to-transparent opacity-90 pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 max-w-6xl mx-auto z-10">
           <Link
             to="/projects"
             className="text-[#ff7043] font-semibold flex items-center mb-6 hover:text-white transition-colors"
@@ -97,13 +96,11 @@ export const ProjectDetails = () => {
 
       <div className="max-w-6xl mx-auto px-[5%] mt-16">
         {/* Main Content (Portable Text) */}
-        <div className="w-full prose prose-lg prose-headings:text-[#1a1a24] prose-a:text-[#ff7043] max-w-none text-gray-700 leading-relaxed">
+        <div className="w-full max-w-none text-xl text-gray-700 leading-relaxed">
           {fullDescription ? (
             <PortableText value={fullDescription} />
           ) : (
-            <p className="text-xl leading-relaxed text-gray-600">
-              {briefDescription}
-            </p>
+            <p className="text-gray-600">{briefDescription}</p>
           )}
         </div>
       </div>

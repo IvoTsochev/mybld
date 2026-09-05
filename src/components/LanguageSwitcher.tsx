@@ -5,7 +5,7 @@ export const LanguageSwitcher = () => {
 
   return (
     <div
-      className="flex items-center gap-1 rounded-full border border-white/30 p-1"
+      className="flex rounded-full border border-white/30 p-1 max-w-fit"
       role="group"
       aria-label="Language"
     >
